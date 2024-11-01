@@ -38,6 +38,11 @@ io.on('connection', (socket) => {
 		socket.on('disconnect', () => {
 			socket.to(roomId).emit('user-disconnected', { id: socket.id });
 		});
+
+		socket.on('leave-room', () => {
+			socket.leave(roomId);
+			socket.to(roomId).emit('user-disconnected', { id: socket.id });
+		});
 	})
 });
 
